@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { NavBar } from "./_components/NavBar";
+import { ReactNode } from "react"
+import { NavBar } from "./_components/NavBar"
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -7,5 +7,5 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <NavBar />
       <div className="container py-6">{children}</div>
     </div>
-  );
+  )
 }

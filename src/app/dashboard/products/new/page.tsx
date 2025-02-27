@@ -1,8 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PageWithBackButton } from "../../_components/PageWithBackButton";
-import { ProductDetailsForm } from "../../_components/forms/ProductDeailsForm";
-import { HasPermission } from "@/components/HasPermission";
-import { canCreateProduct } from "@/server/permissions";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { PageWithBackButton } from "../../_components/PageWithBackButton"
+import { ProductDetailsForm } from "../../_components/forms/ProductDeailsForm"
+import { HasPermission } from "@/components/HasPermission"
+import { canCreateProduct } from "@/server/permissions"
 
 export default function NewProductPage() {
   return (
@@ -25,5 +25,5 @@ export default function NewProductPage() {
         </Card>
       </HasPermission>
     </PageWithBackButton>
-  );
+  )
 }

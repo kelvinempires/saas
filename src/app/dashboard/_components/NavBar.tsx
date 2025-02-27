@@ -1,6 +1,6 @@
-import { BrandLogo } from "@/components/BrandLogo";
-import { UserButton } from "@clerk/nextjs";
-import Link from "next/link";
+import { BrandLogo } from "@/components/BrandLogo"
+import { UserButton } from "@clerk/nextjs"
+import Link from "next/link"
 
 export function NavBar() {
   return (
@@ -15,5 +15,5 @@ export function NavBar() {
         <UserButton />
       </nav>
     </header>
-  );
+  )
 }

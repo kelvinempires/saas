@@ -21,7 +21,7 @@ import { productCustomizationSchema } from "@/schemas/products"
 import { updateProductCustomization } from "@/server/actions/products"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { custom, z } from "zod"
+import { z } from "zod"
 
 export function ProductCustomizationForm({
   customization,
@@ -73,7 +73,7 @@ export function ProductCustomizationForm({
         <Banner
           message={formValues.locationMessage}
           mappings={{
-            country: "India",
+            country: "Nigeria",
             coupon: "HALF-OFF",
             discount: "50",
           }}
@@ -231,5 +231,5 @@ export function ProductCustomizationForm({
         </form>
       </Form>
     </>
-  )
+  );
 }

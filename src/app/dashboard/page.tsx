@@ -5,17 +5,14 @@ import Link from "next/link"
 import { ArrowRightIcon, PlusIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProductGrid } from "./_components/ProductGrid"
-import { HasPermission } from "@/components/HasPermission"
-import { canAccessAnalytics } from "@/server/permissions"
-import {
-  CHART_INTERVALS,
-  getViewsByDayChartData,
-} from "@/server/db/productViews"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ViewsByDayChart } from "./_components/charts/ViewsByDayChart"
+import { HasPermission } from "@/components/HasPermission"
+import { canAccessAnalytics } from "@/server/permissions"
+import { CHART_INTERVALS, getViewsByDayChartData } from "@/server/db/productViews"
 
 export default async function DashboardPage() {
-  const { userId, redirectToSignIn } = auth()
+  const { userId, redirectToSignIn } = await auth()
   if (userId == null) return redirectToSignIn()
 
   const products = await getProducts(userId, { limit: 6 })

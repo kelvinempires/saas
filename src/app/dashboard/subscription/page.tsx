@@ -127,11 +127,14 @@ function PricingCard({
       </CardHeader>
       <CardContent>
         <form
-          action={
-             name === "Free"
-              ? createCancelSession
-              : createCheckoutSession.bind(null, name)
-          }>
+          onSubmit={async (e) => {
+            e.preventDefault();
+            if (name === "Free") {
+              await createCancelSession();
+            } else {
+              await createCheckoutSession(name);
+            }
+          }}>
           <Button
             disabled={isCurrent}
             className="text-lg w-full rounded-lg"

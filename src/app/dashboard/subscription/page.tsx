@@ -15,11 +15,7 @@ import {
 } from "@/data/subscriptionTiers"
 import { formatCompactNumber } from "@/lib/formatters"
 import { cn } from "@/lib/utils"
-import {
-  createCancelSession,
-  createCheckoutSession,
-  createCustomerPortalSession,
-} from "@/server/actions/stripe"
+import { createCancelSession, createCheckoutSession, createCustomerPortalSession } from "@/server/actions/stripe"
 import { getProductCount } from "@/server/db/products"
 import { getProductViewCount } from "@/server/db/productViews"
 import { getUserSubscriptionTier } from "@/server/db/subscription"
@@ -29,7 +25,7 @@ import { CheckIcon } from "lucide-react"
 import { ReactNode } from "react"
 
 export default async function SubscriptionPage() {
-  const { userId, redirectToSignIn } = auth()
+  const { userId, redirectToSignIn } = await auth()
   if (userId == null) return redirectToSignIn()
   const tier = await getUserSubscriptionTier(userId)
   const productCount = await getProductCount(userId)
@@ -81,7 +77,10 @@ export default async function SubscriptionPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form action={createCustomerPortalSession}>
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                await createCustomerPortalSession();
+              }}>
                 <Button
                   variant="accent"
                   className="text-lg rounded-lg"
@@ -129,11 +128,10 @@ function PricingCard({
       <CardContent>
         <form
           action={
-            name === "Free"
+             name === "Free"
               ? createCancelSession
               : createCheckoutSession.bind(null, name)
-          }
-        >
+          }>
           <Button
             disabled={isCurrent}
             className="text-lg w-full rounded-lg"

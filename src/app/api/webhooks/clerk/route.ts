@@ -3,25 +3,25 @@ import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { env } from "@/data/env/server";
 import { createUserSubscription } from "@/server/db/subscription";
-// import {
-//   getUserSubscription,
-// } from "@/server/db/subscription";
-// import { deleteUser } from "@/server/db/users";
-// import { Stripe } from "stripe";
+import {
+  getUserSubscription,
+} from "@/server/db/subscription";
+import { deleteUser } from "@/server/db/users";
+import { Stripe } from "stripe";
 
-// const stripe = new Stripe(env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(env.STRIPE_SECRET_KEY);
 
 export async function POST(req: Request) {
-//   const headerPayload = headers();
-//   const svixId = headerPayload.get("svix-id");
-//   const svixTimestamp = headerPayload.get("svix-timestamp");
-//   const svixSignature = headerPayload.get("svix-signature");
+  const headerPayload = headers();
+  const svixId = headerPayload.get("svix-id");
+  const svixTimestamp = headerPayload.get("svix-timestamp");
+  const svixSignature = headerPayload.get("svix-signature");
 
-//   if (!svixId || !svixTimestamp || !svixSignature) {
-//     return new Response("Error occurred -- no svix headers", {
-//       status: 400,
-//     });
-//   }
+  if (!svixId || !svixTimestamp || !svixSignature) {
+    return new Response("Error occurred -- no svix headers", {
+      status: 400,
+    });
+  }
 
   const payload = await req.json();
   const body = JSON.stringify(payload);

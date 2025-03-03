@@ -15,7 +15,7 @@ import {
 } from "@/lib/cache";
 import { startOfDay, subDays } from "date-fns";
 import { and, count, desc, eq, gte, SQL, sql } from "drizzle-orm";
-import { tz } from "@date-fns/tz";
+// import { tz } from "@date-fns/tz";
 
 export function getProductViewCount(userId: string, startDate: Date) {
   const cacheFn = dbCache(getProductViewCountInternal, {
@@ -161,7 +161,7 @@ async function getViewsByCountryChartDataInternal({
   userId: string;
   interval: (typeof CHART_INTERVALS)[keyof typeof CHART_INTERVALS];
 }) {
-  const startDate = startOfDay(interval.startDate, { in: tz(timezone) });
+  const startDate = startOfDay(interval.startDate);
   const productsSq = getProductSubQuery(userId, productId);
   return await db
     .with(productsSq)
@@ -195,7 +195,7 @@ async function getViewsByPPPChartDataInternal({
   userId: string;
   interval: (typeof CHART_INTERVALS)[keyof typeof CHART_INTERVALS];
 }) {
-  const startDate = startOfDay(interval.startDate, { in: tz(timezone) });
+  const startDate = startOfDay(interval.startDate);
   const productsSq = getProductSubQuery(userId, productId);
   const productViewSq = db.$with("productViews").as(
     db
